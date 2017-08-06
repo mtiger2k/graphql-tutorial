@@ -22,6 +22,18 @@ type Message {
   text: String
 }
 
+input Upload {
+  name: String!
+  type: String!
+  size: Int!
+  path: String!
+}
+
+type User {
+  id: ID!
+  name: String
+}
+
 # This type specifies the entry points into our API
 type Query {
   channels: [Channel]    # "[]" means this is a list of channels
@@ -32,6 +44,7 @@ type Query {
 type Mutation {
   addChannel(name: String!): Channel
   addMessage(message: MessageInput!): Message
+  updateUserAvatar(userId: String!, avatar: Upload!): User!
 }
 
 # The subscription root type, specifying what we can subscribe to

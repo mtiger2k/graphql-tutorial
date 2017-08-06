@@ -10,15 +10,17 @@ import './App.css';
 import ChannelsListWithData from './components/ChannelsListWithData';
 import NotFound from './components/NotFound';
 import ChannelDetails from './components/ChannelDetails';
+import Upload from './components/Upload';
 
 import {
   ApolloClient,
   ApolloProvider,
-  createNetworkInterface,
   toIdValue,
 } from 'react-apollo';
 
 import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws';
+
+import { createNetworkInterface } from 'apollo-upload-client'
 
 const networkInterface = createNetworkInterface({ uri: 'http://localhost:4000/graphql' });
 networkInterface.use([{
@@ -67,6 +69,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={ChannelsListWithData}/>
               <Route path="/channel/:channelId" component={ChannelDetails}/>
+              <Route path="/upload" component={Upload}/>
               <Route component={ NotFound }/>
             </Switch>
           </div>

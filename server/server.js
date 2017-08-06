@@ -12,13 +12,19 @@ import { schema } from './src/schema';
 import { execute, subscribe } from 'graphql';
 import { createServer } from 'http';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
+import { apolloUploadExpress } from 'apollo-upload-server'
 
 const PORT = 4000;
 const server = express();
 
 server.use('*', cors({ origin: 'http://localhost:3000' }));
 
-server.use('/graphql', bodyParser.json(), graphqlExpress({
+server.use('/graphql', bodyParser.json(), 
+  apolloUploadExpress({
+    // Optional, defaults to OS temp directory
+    uploadDir: '/Users/tiansha/react/graphql-tutorial/uploads'
+  }),
+  graphqlExpress({
   schema
 }));
 

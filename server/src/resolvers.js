@@ -54,6 +54,13 @@ export const resolvers = {
 
       return newMessage;
     },
+    updateUserAvatar(root, { userId, avatar }) {
+      // ✂ Auth
+      // ✂ Update avatar
+      console.log(`New avatar for user ${userId} is ${avatar.size} bytes`)
+      // ✂ Return fresh user data
+      return {id: '1111', name: 'test'};
+    }
   },
   Subscription: {
     messageAdded: {
