@@ -6,20 +6,30 @@ import {
 } from 'graphql-server-express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import morgan from 'morgan';
 
-import { schema } from './src/schema';
+import router from './router'
+import { schema } from './schema';
+import mongoose from 'mongoose';
 
 import { execute, subscribe } from 'graphql';
 import { createServer } from 'http';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 import { apolloUploadExpress } from 'apollo-upload-server'
 
+mongoose.connect('mongodb://localhost:auth/auth')
+
 const PORT = 4000;
 const server = express();
 
-server.use('*', cors({ origin: 'http://localhost:3000' }));
+server.use(morgan('combined'));
+//server.use('*', cors({ origin: 'http://localhost:3000' }));
+server.use(cors());
+server.use(bodyParser.json())
 
-server.use('/graphql', bodyParser.json(), 
+router(server);
+
+server.use('/graphql', 
   apolloUploadExpress({
     // Optional, defaults to OS temp directory
     uploadDir: '/Users/tiansha/react/graphql-tutorial/uploads'

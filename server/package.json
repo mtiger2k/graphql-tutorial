@@ -4,7 +4,7 @@
   "description": "A simple GraphQL server",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon ./server.js --exec babel-node -e js",
+    "start": "nodemon src/server.js --exec babel-node -e js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "apollo-upload-server": "^2.0.4",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.1",
     "cors": "^2.8.3",
     "express": "^4.15.2",
@@ -26,6 +27,12 @@
     "graphql-server-module-graphiql": "^0.8.2",
     "graphql-subscriptions": "^0.4.3",
     "graphql-tools": "^1.0.0",
+    "jwt-simple": "^0.5.1",
+    "mongoose": "^4.11.5",
+    "morgan": "^1.8.2",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
+    "passport-local": "^1.0.0",
     "subscriptions-transport-ws": "^0.7.3"
   }
 }
