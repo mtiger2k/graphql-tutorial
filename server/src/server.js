@@ -17,7 +17,9 @@ import { createServer } from 'http';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 import { apolloUploadExpress } from 'apollo-upload-server'
 
-mongoose.connect('mongodb://localhost:auth/auth')
+mongoose.connect('mongodb://localhost/auth', {
+  useMongoClient: true
+})
 
 const PORT = 4000;
 const server = express();

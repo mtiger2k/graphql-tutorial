@@ -10,9 +10,14 @@ import ChannelsListWithData from './components/ChannelsListWithData';
 import NotFound from './components/NotFound';
 import ChannelDetails from './components/ChannelDetails';
 import Upload from './components/Upload';
+import Signin from './components/auth/signin'
+import Signout from './components/auth/signout'
+import Signup from './components/auth/signup'
+import { PrivateRoute } from './components/auth/require_auth'
+import Feature from './components/feature'
 
 // integrate with redux
-import { AUTH_SIGNIN } from './actions';
+import { AUTH_USER } from './actions/types'
 import configureStore from './lib/configureStore';
 import createApolloClient from './lib/createApolloClient';
 
@@ -35,7 +40,7 @@ const store = configureStore(initialState, client, history);
 const token = localStorage.getItem('token');
 if (token) {
   // We need to update application state if the token exists
-  store.dispatch({ type: AUTH_SIGNIN });
+  store.dispatch({ type: AUTH_USER });
 }
 
 // Now you can dispatch navigation actions from anywhere!
@@ -52,6 +57,10 @@ class App extends Component {
               <Route exact path="/" component={ChannelsListWithData}/>
               <Route path="/channel/:channelId" component={ChannelDetails}/>
               <Route path="/upload" component={Upload}/>
+              <Route path="/signin" component={Signin}/>
+              <Route path="/signout" component={Signout}/>
+              <Route path="/signup" component={Signup}/>
+              <PrivateRoute path="/feature" component={Feature}/>
               <Route component={ NotFound }/>
             </Switch>
           </div>

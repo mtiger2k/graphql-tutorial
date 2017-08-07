@@ -181,3 +181,6 @@ div.message span {
   left: 10px;
 }
 
+.error {
+  color: red;
+}
