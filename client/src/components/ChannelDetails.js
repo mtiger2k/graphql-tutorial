@@ -8,6 +8,15 @@ import {
     graphql,
 } from 'react-apollo';
 
+const messagesSubscription = gql`
+  subscription messageAdded($channelId: ID!) {
+    messageAdded(channelId: $channelId) {
+      id
+      text
+    }
+  }
+`
+
 class ChannelDetails extends Component {
   componentWillMount() {
     this.props.data.subscribeToMore({
@@ -71,15 +80,6 @@ export const channelDetailsQuery = gql`
     }
   }
 `;
-
-const messagesSubscription = gql`
-  subscription messageAdded($channelId: ID!) {
-    messageAdded(channelId: $channelId) {
-      id
-      text
-    }
-  }
-`
 
 export default (graphql(channelDetailsQuery, {
   options: (props) => ({

@@ -2,10 +2,12 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4000",
   "dependencies": {
     "apollo-client": "^1.1.1",
     "apollo-test-utils": "^0.1.1",
     "apollo-upload-client": "^5.1.0",
+    "axios": "^0.16.2",
     "false": "0.0.4",
     "graphql": "^0.10.1",
     "graphql-tools": "^0.10.0",

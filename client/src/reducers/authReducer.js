@@ -1,19 +1,17 @@
-import {
-  AUTH_SIGNIN,
-  AUTH_SIGNOUT
-} from '../actions';
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from '../actions/types'
 
-const initialState = {
-  authenticated: false
-};
-
-export default (state = initialState, action) => {
+export default function authReducer(state = {}, action) {
   switch (action.type) {
-    case AUTH_SIGNIN:
-      return { ...state, authenticated: true };
-    case AUTH_SIGNOUT:
-      return { ...state, authenticated: false };
+    case AUTH_USER:
+      return {...state, error: '', authenticated: true}
+    case UNAUTH_USER:
+      return {...state, authenticated: false}
+    case AUTH_ERROR:
+      return {...state, error: action.payload}
+    case FETCH_MESSAGE:
+      return {...state, message: action.payload}
     default:
-      return state;
+      return state
   }
-};
+}
+
