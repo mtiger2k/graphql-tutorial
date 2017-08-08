@@ -2,7 +2,7 @@ import React from 'react'
 
 export const renderTextField = ({input, type, label, meta: {touched, error}, ...custom}) => (  // Define stateless component to render input and errors
   <div>
-    <input
+    <input className="form-control"
       type={type}
       placeholder={label}
       {...input}

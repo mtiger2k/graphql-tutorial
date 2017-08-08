@@ -1,0 +1,70 @@
+{
+  "brand":      "Graphql Tutorial",
+  "leftLinks":  [
+    {
+      "label":      "Channel List",
+      "link":       "/channelList",
+      "view":       "channelList",
+      "isRouteBtn": true,
+      "alwaysShows": true,
+      "showWhenUserAuth": true,
+      "hideWhenUserAuth": false
+    },
+    {
+      "label":      "Protected",
+      "link":       "/feature",
+      "view":       "protected",
+      "isRouteBtn": true,
+      "alwaysShows": true,
+      "showWhenUserAuth": true,
+      "hideWhenUserAuth": false
+    },
+    {
+      "label":      "Upload",
+      "link":       "/upload",
+      "view":       "upload",
+      "isRouteBtn": true,
+      "alwaysShows": true,
+      "showWhenUserAuth": true,
+      "hideWhenUserAuth": false
+    }
+  ],
+  "rightLinks": [
+    {
+      "label":      "Login",
+      "link":       "/signin",
+      "view":       "login",
+      "isRouteBtn": true,
+      "alwaysShows": false,
+      "showWhenUserAuth": false,
+      "hideWhenUserAuth": true
+    },
+    {
+      "label":      "Register",
+      "link":       "/signup",
+      "view":       "register",
+      "isRouteBtn": true,
+      "alwaysShows": false,
+      "showWhenUserAuth": false,
+      "hideWhenUserAuth": true
+    },
+    {
+      "label":      "Logout",
+      "link":       "/signout",
+      "view":       "logout",
+      "isRouteBtn": true,
+      "alwaysShows": false,
+      "showWhenUserAuth": true,
+      "hideWhenUserAuth": false
+    },
+    {
+      "label":      "About",
+      "link":       "/about",
+      "view":       "about",
+      "isRouteBtn": true,
+      "alwaysShows": true,
+      "showWhenUserAuth": true,
+      "hideWhenUserAuth": false
+    }
+  ]
+}

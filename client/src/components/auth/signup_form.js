@@ -16,9 +16,9 @@ class SignupForm extends Component {
     const {handleSubmit} = this.props
 
     return (
-      <div>
+      <div className="container-fluid">
         {this.renderAlert()}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="well col-sm-6">
 
           <Field
             label="Email"
@@ -38,7 +38,7 @@ class SignupForm extends Component {
             component={renderTextField}
             type="password"/>
 
-          <button type="submit" label="Sign Up" labelColor={'#FFFFFF'}>Sign up</button>
+          <button type="submit" label="Sign Up" className="btn btn-default btn-flat">Sign up</button>
         </form>
       </div>
     )
