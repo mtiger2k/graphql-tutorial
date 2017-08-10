@@ -1,13 +1,13 @@
 import axios from 'axios'
 import { UNAUTH_USER, AUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from './types'
-const ROOT_URL = 'http://localhost:4000'
+//const ROOT_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : '/'
 
 export function signinUser({email, password}) {
 
   return function (dispatch) {
 
     // submit email and password to server
-    const request = axios.post(`${ROOT_URL}/signin`, {email, password})
+    const request = axios.post('/signin', {email, password})
     request
       .then(response => {
         // -Save the JWT token
@@ -35,7 +35,7 @@ export function signoutUser() {
 
 export function signupUser({email, password, passwordConfirmation}) {
   return function (dispatch) {
-    axios.post(`${ROOT_URL}/signup`, {email, password, passwordConfirmation})
+    axios.post('/signup', {email, password, passwordConfirmation})
       .then(response => {
         dispatch({type: AUTH_USER})
         localStorage.setItem('token', response.data.token)
@@ -55,7 +55,7 @@ export function authError(error) {
 
 export function fetchMessage() {
   return function (dispatch) {
-    axios.get(ROOT_URL, {
+    axios.get('/getMessage', {
       headers: {authorization: localStorage.getItem('token')}
     })
       .then(response => {

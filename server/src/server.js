@@ -16,6 +16,7 @@ import { execute, subscribe } from 'graphql';
 import { createServer } from 'http';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 import { apolloUploadExpress } from 'apollo-upload-server'
+import path from 'path'
 
 mongoose.connect('mongodb://localhost/auth', {
   useMongoClient: true
@@ -23,6 +24,9 @@ mongoose.connect('mongodb://localhost/auth', {
 
 const PORT = 4000;
 const server = express();
+
+console.log(process.env.NODE_ENV);
+// Express only serves static assets in production
 
 server.use(morgan('combined'));
 //server.use('*', cors({ origin: 'http://localhost:3000' }));
@@ -44,6 +48,15 @@ server.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
   subscriptionsEndpoint: `ws://localhost:4000/subscriptions`
 }));
+
+if (process.env.NODE_ENV === "production") {
+  // move build to server folder
+  server.use('/', express.static("build"));
+  server.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+}
+
 
 // We wrap the express server so that we can attach the WebSocket for subscriptions
 const ws = createServer(server);

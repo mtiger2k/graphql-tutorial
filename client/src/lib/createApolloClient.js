@@ -9,7 +9,7 @@ import { createNetworkInterface } from 'apollo-upload-client'
 
 export default function createApolloClient() {
   const token = localStorage.getItem('token');
-  const networkInterface = createNetworkInterface({ uri: 'http://localhost:4000/graphql' });
+  const networkInterface = createNetworkInterface({ uri: '/graphql' });
   networkInterface.use([{
     applyMiddleware(req, next) {
       setTimeout(next, 500);
@@ -27,7 +27,8 @@ export default function createApolloClient() {
       next();
     }
   }]);
-
+  
+  //TODO: need to set server:host in production environment
   const wsClient = new SubscriptionClient(`ws://localhost:4000/subscriptions`, {
     reconnect: true
   });
