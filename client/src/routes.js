@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Router,
   Route,
   Switch,
 } from 'react-router-dom';
@@ -13,11 +14,11 @@ import RegisterPage from './app/components/pages/RegisterPage'
 import Signout from './app/components/pages/Signout'
 import NotFound from './app/components/pages/NotFound';
 
-import ChannelsListWithData from './components/ChannelsListWithData';
-import About from './components/about';
-import ChannelDetails from './components/ChannelDetails';
-import Upload from './components/Upload';
-import Feature from './components/feature'
+import ChannelsListWithData from './app/components/pages/ChannelsListWithData';
+import About from './app/components/pages/About';
+import ChannelDetails from './app/components/pages/ChannelDetails';
+import Upload from './app/components/pages/Upload';
+import Feature from './app/components/pages/Feature'
 
 export const routes = () => {
 
@@ -29,30 +30,36 @@ export const routes = () => {
     );
   };
 
-  const PrivateRouteWithLayout = ({ component, ...rest }) => {
+  const PrivateRouteWithLayout = ({ ...rest }) => {
     return (
       <Layout>
-        <PrivateRoute {...rest} render={ () => React.createElement(component) } />
+        <PrivateRoute {...rest} />
       </Layout>
     );
   };
 
   return (
-    <Switch>
-      <Route exact path="/signout" component={Signout}/>
-      <Route exact path="/signin" component={LoginPage}/>
-      <Route exact path="/signup" component={RegisterPage}/>
-      {/* non protected views */}
-      <RouteWithLayout exact path="/" component={HomePage} />
-      <RouteWithLayout path="/about" component={About}/>
-      <RouteWithLayout path="/upload" component={Upload}/>
-      {/* protected views */}
-      <PrivateRouteWithLayout path="/channelList" component={ChannelsListWithData}/>
-      <PrivateRouteWithLayout path="/channel/:channelId" component={ChannelDetails}/>
-      <PrivateRouteWithLayout path="/feature" component={Feature}/>
-      {/* page not found */}
-      <Route path="*" component={NotFound} />
-    </Switch>
+    <div>
+      <Switch>
+        <Route exact path="/signout" component={Signout}/>
+        <Route exact path="/signin" component={LoginPage}/>
+        <Route exact path="/signup" component={RegisterPage}/>
+        <Route>
+          <Layout>
+          {/* non protected views */}
+          <Route exact path="/" component={HomePage} />
+          <Route path="/about" component={About}/>
+          <Route path="/upload" component={Upload}/>
+          {/* protected views */}
+          <PrivateRoute path="/channelList" component={ChannelsListWithData}/>
+          <PrivateRoute path="/channel/:channelId" component={ChannelDetails}/>
+          <PrivateRoute path="/feature" component={Feature}/>
+          {/* page not found */}
+          <Route path="*" component={NotFound} />
+          </Layout>
+        </Route>
+      </Switch>
+    </div>
   );
 };
 

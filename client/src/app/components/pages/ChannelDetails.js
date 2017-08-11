@@ -7,6 +7,12 @@ import {
     graphql,
 } from 'react-apollo';
 
+import PageWrapper from '../../../lib/page/PageWrapper';
+import PageHeader from '../../../lib/page/PageHeader';
+import Breadcrumb from '../../../lib/page/Breadcrumb';
+import PageContent from '../../../lib/page/PageContent';
+import Box from '../../../lib/widgets/Box';
+
 const NotFound = () => {
   return (
     <div className="NotFound">404 Not Found</div>
@@ -53,9 +59,9 @@ class ChannelDetails extends Component {
   render() {
     const { data: {loading, error, channel }, match } = this.props;
 
-    if (loading) {
+    /*if (loading) {
       return <ChannelPreview channelId={match.params.channelId}/>;
-    }
+    }*/
     if (error) {
       return <p>{error.message}</p>;
     }
@@ -64,12 +70,37 @@ class ChannelDetails extends Component {
     }
 
     return (
-      <div>
-        <div className="channelName">
-          {channel.name}
-        </div>
-        <MessageList messages={channel.messages}/>
-      </div>);
+    <PageWrapper>
+      <PageHeader
+        title="Channel Detail"
+        description="Channel Detail"
+      >
+        <Breadcrumb
+          items={[
+            { key: 1, icon: 'fa fa-home', title: 'Home', url: '/' },
+            { key: 2, title: 'Channels List', url: '/channelList'},
+            { key: 3, title: 'Channel Detail' },
+          ]}
+        />
+      </PageHeader>
+      <PageContent>
+        <Box
+          title="Channel Detail"
+          status="primary"
+          expandable
+          removable
+        >
+        {loading && <ChannelPreview channelId={match.params.channelId}/>}
+        {!loading && <div>
+          <div className="channelName">
+            {channel.name}
+          </div>
+          <MessageList messages={channel.messages}/>
+        </div>}
+        </Box>
+      </PageContent>
+    </PageWrapper>
+    );
   }
 }
 

@@ -1,4 +1,8 @@
-import React from 'react';
+// @flow weak
+
+import React, {
+  PureComponent
+}                     from 'react';
 
 import PageWrapper from '../../../lib/page/PageWrapper';
 import PageHeader from '../../../lib/page/PageHeader';
@@ -6,9 +10,9 @@ import Breadcrumb from '../../../lib/page/Breadcrumb';
 import PageContent from '../../../lib/page/PageContent';
 import Box from '../../../lib/widgets/Box';
 
-const NotFound = ({ match }) => {
-  
-  return (
+class About extends PureComponent {
+  render() {
+    return(
     <PageWrapper>
       <PageHeader
         title="Home page"
@@ -28,11 +32,15 @@ const NotFound = ({ match }) => {
           expandable
           removable
         >
-    	<div className="NotFound">404 Not Found</div>
+        <h1>
+        About
+      	</h1>
         </Box>
       </PageContent>
     </PageWrapper>
-  );
-};
 
-export default NotFound;
+    );
+  }
+}
+
+export default About;

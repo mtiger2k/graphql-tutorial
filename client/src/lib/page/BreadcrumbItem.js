@@ -1,6 +1,10 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
+import {
+  Link
+} from 'react-router-dom'
+
 const propTypes = {
   icon: PropTypes.string,
   title: PropTypes.string,
@@ -11,7 +15,7 @@ function BreadcrumbItem({ icon, title, url }) {
   return (
     <li className={classNames({ active: !url })}>
       {url
-        ? <a href={url}>{icon ? <i className={icon} /> : ''} {title}</a>
+        ? <Link to={url}>{icon ? <i className={icon} /> : ''} {title}</Link>
         : title
       }
     </li>

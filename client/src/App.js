@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 //import 'font-awesome/css/font-awesome.min.css';
 //import "bootstrap/dist/css/bootstrap.min.css";
 
-import navigationModel from './navigation.json';
-import NavigationBar from './components/navigation/NavigationBar';
+//import navigationModel from './navigation.json';
+//import NavigationBar from './components/navigation/NavigationBar';
 //import NavigationBar from './components/navbar';
 //import './App.css';
 import MainRoutes from './routes';
@@ -40,11 +40,11 @@ if (token) {
 // store.dispatch(push('/foo'))
 
 class App extends Component {
-  state = {
+  /*state = {
     navModel : navigationModel
-  };
+  };*/
   render() {
-    const { navModel } = this.state;
+    //const { navModel } = this.state;
     return (
       <ApolloProvider store={store} client={client}>
         <ConnectedRouter history={history}>
