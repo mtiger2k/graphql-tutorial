@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import MessageList from './MessageList';
 import ChannelPreview from './ChannelPreview';
-import NotFound from './NotFound';
 
 import {
     gql,
     graphql,
 } from 'react-apollo';
+
+const NotFound = () => {
+  return (
+    <div className="NotFound">404 Not Found</div>
+  );
+};
 
 const messagesSubscription = gql`
   subscription messageAdded($channelId: ID!) {

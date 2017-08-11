@@ -9,8 +9,6 @@ import NavigationBar from './components/navigation/NavigationBar';
 //import './App.css';
 import MainRoutes from './routes';
 
-import Layout from './app/components/layout/Layout';
-
 // integrate with redux
 import { AUTH_USER } from './actions/types'
 import configureStore from './lib/configureStore';
@@ -50,9 +48,9 @@ class App extends Component {
     return (
       <ApolloProvider store={store} client={client}>
         <ConnectedRouter history={history}>
-          <Layout>
-              <MainRoutes />
-          </Layout>
+          <div>
+            <MainRoutes />
+          </div>
         </ConnectedRouter>
       </ApolloProvider>
     );

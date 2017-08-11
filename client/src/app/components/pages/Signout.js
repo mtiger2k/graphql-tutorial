@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as actions from '../../actions'
+import * as actions from '../../../actions'
+import { Redirect } from 'react-router-dom'
+
 class Signout extends Component {
 
   componentWillMount() {
@@ -8,7 +10,7 @@ class Signout extends Component {
   }
 
   render() {
-    return <div>Bye Bye</div>
+    return <Redirect to='/'/>
   }
 }
 

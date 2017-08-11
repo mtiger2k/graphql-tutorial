@@ -4,35 +4,52 @@ import {
   Switch,
 } from 'react-router-dom';
 
+import Layout from './app/components/layout/Layout';
+
+import { PrivateRoute } from './app/components/auth/require_auth'
+import HomePage from './app/components/pages/HomePage'
+import LoginPage from './app/components/pages/LoginPage'
+import RegisterPage from './app/components/pages/RegisterPage'
+import Signout from './app/components/pages/Signout'
+import NotFound from './app/components/pages/NotFound';
+
 import ChannelsListWithData from './components/ChannelsListWithData';
-import NotFound from './components/NotFound';
-import Home from './components/home';
 import About from './components/about';
 import ChannelDetails from './components/ChannelDetails';
 import Upload from './components/Upload';
-import Signin from './components/auth/signin'
-import Signout from './components/auth/signout'
-import Signup from './components/auth/signup'
-import { PrivateRoute } from './components/auth/require_auth'
 import Feature from './components/feature'
 
-import HomePage from './app/components/pages/HomePage'
-
-
 export const routes = () => {
+
+  const RouteWithLayout = ({ component, ...rest }) => {
+    return (
+      <Layout>
+        <Route {...rest} render={ () => React.createElement(component) } />
+      </Layout>
+    );
+  };
+
+  const PrivateRouteWithLayout = ({ component, ...rest }) => {
+    return (
+      <Layout>
+        <PrivateRoute {...rest} render={ () => React.createElement(component) } />
+      </Layout>
+    );
+  };
+
   return (
     <Switch>
+      <Route exact path="/signout" component={Signout}/>
+      <Route exact path="/signin" component={LoginPage}/>
+      <Route exact path="/signup" component={RegisterPage}/>
       {/* non protected views */}
-      <Route exact path="/" component={HomePage}/>
-      <Route path="/about" component={About}/>
-      <PrivateRoute path="/channelList" component={ChannelsListWithData}/>
-      <PrivateRoute path="/channel/:channelId" component={ChannelDetails}/>
-      <Route path="/upload" component={Upload}/>
-      <Route path="/signout" component={Signout}/>
-      <Route path="/signin" component={Signin}/>
-      <Route path="/signup" component={Signup}/>
+      <RouteWithLayout exact path="/" component={HomePage} />
+      <RouteWithLayout path="/about" component={About}/>
+      <RouteWithLayout path="/upload" component={Upload}/>
       {/* protected views */}
-      <PrivateRoute path="/feature" component={Feature}/>
+      <PrivateRouteWithLayout path="/channelList" component={ChannelsListWithData}/>
+      <PrivateRouteWithLayout path="/channel/:channelId" component={ChannelDetails}/>
+      <PrivateRouteWithLayout path="/feature" component={Feature}/>
       {/* page not found */}
       <Route path="*" component={NotFound} />
     </Switch>
