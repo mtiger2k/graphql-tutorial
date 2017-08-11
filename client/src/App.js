@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 
-import 'font-awesome/css/font-awesome.min.css';
-import "bootstrap/dist/css/bootstrap.min.css";
+//import 'font-awesome/css/font-awesome.min.css';
+//import "bootstrap/dist/css/bootstrap.min.css";
 
 import navigationModel from './navigation.json';
 import NavigationBar from './components/navigation/NavigationBar';
 //import NavigationBar from './components/navbar';
 //import './App.css';
 import MainRoutes from './routes';
+
+import Layout from './app/components/layout/Layout';
 
 // integrate with redux
 import { AUTH_USER } from './actions/types'
@@ -48,18 +50,9 @@ class App extends Component {
     return (
       <ApolloProvider store={store} client={client}>
         <ConnectedRouter history={history}>
-          <div id="appContainer">
-            <NavigationBar
-              brand={navModel.brand}
-              navModel={navModel}
-              handleLeftNavItemClick={this.handleLeftNavItemClick}
-              handleRightNavItemClick={this.handleRightNavItemClick}
-            />
-            <h1></h1>
-            <div className="container-fluid">
+          <Layout>
               <MainRoutes />
-            </div>
-          </div>
+          </Layout>
         </ConnectedRouter>
       </ApolloProvider>
     );

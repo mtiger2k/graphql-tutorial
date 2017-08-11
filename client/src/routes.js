@@ -16,12 +16,14 @@ import Signup from './components/auth/signup'
 import { PrivateRoute } from './components/auth/require_auth'
 import Feature from './components/feature'
 
+import HomePage from './app/components/pages/HomePage'
+
 
 export const routes = () => {
   return (
     <Switch>
       {/* non protected views */}
-      <Route exact path="/" component={Home}/>
+      <Route exact path="/" component={HomePage}/>
       <Route path="/about" component={About}/>
       <PrivateRoute path="/channelList" component={ChannelsListWithData}/>
       <PrivateRoute path="/channel/:channelId" component={ChannelDetails}/>
