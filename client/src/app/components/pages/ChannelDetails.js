@@ -15,7 +15,7 @@ import Box from '../../../lib/widgets/Box';
 
 const NotFound = () => {
   return (
-    <div className="NotFound">404 Not Found</div>
+    <div className="NotFound">Channel Not Found</div>
   );
 };
 
@@ -59,16 +59,6 @@ class ChannelDetails extends Component {
   render() {
     const { data: {loading, error, channel }, match } = this.props;
 
-    /*if (loading) {
-      return <ChannelPreview channelId={match.params.channelId}/>;
-    }*/
-    if (error) {
-      return <p>{error.message}</p>;
-    }
-    if(channel === null){
-      return <NotFound />
-    }
-
     return (
     <PageWrapper>
       <PageHeader
@@ -91,12 +81,14 @@ class ChannelDetails extends Component {
           removable
         >
         {loading && <ChannelPreview channelId={match.params.channelId}/>}
-        {!loading && <div>
+        {error && <p>{error.message}</p>}
+        {!loading && channel && <div>
           <div className="channelName">
             {channel.name}
           </div>
           <MessageList messages={channel.messages}/>
         </div>}
+        {!loading && channel == null && <NotFound />}
         </Box>
       </PageContent>
     </PageWrapper>

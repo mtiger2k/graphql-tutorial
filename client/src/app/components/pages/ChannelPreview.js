@@ -12,6 +12,9 @@ const ChannelPreview = ({ data: {loading, error, channel } }) => {
   if (error) {
     return <p>{error.message}</p>;
   }
+  if (channel == null) {
+    return <p>Not found</p>
+  }
 
   return (
     <div>

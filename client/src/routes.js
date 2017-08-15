@@ -44,20 +44,16 @@ export const routes = () => {
         <Route exact path="/signout" component={Signout}/>
         <Route exact path="/signin" component={LoginPage}/>
         <Route exact path="/signup" component={RegisterPage}/>
-        <Route>
-          <Layout>
-          {/* non protected views */}
-          <Route exact path="/" component={HomePage} />
-          <Route path="/about" component={About}/>
-          <Route path="/upload" component={Upload}/>
-          {/* protected views */}
-          <PrivateRoute path="/channelList" component={ChannelsListWithData}/>
-          <PrivateRoute path="/channel/:channelId" component={ChannelDetails}/>
-          <PrivateRoute path="/feature" component={Feature}/>
-          {/* page not found */}
-          <Route path="*" component={NotFound} />
-          </Layout>
-        </Route>
+        {/* non protected views */}
+        <PrivateRouteWithLayout exact path="/" component={HomePage} />
+        <PrivateRouteWithLayout path="/about" component={About}/>
+        <PrivateRouteWithLayout path="/upload" component={Upload}/>
+        {/* protected views */}
+        <PrivateRouteWithLayout path="/channelList" component={ChannelsListWithData}/>
+        <PrivateRouteWithLayout path="/channel/:channelId" component={ChannelDetails}/>
+        <PrivateRouteWithLayout path="/feature" component={Feature}/>
+        {/* page not found */}
+        <Route path="*" component={NotFound} />
       </Switch>
     </div>
   );

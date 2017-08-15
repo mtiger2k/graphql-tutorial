@@ -29,11 +29,13 @@ const AddChannel = ({ mutate }) => {
   };
 
   return (
+    <div className="channelInput">
     <input
       type="text"
       placeholder="New channel"
       onKeyUp={handleKeyUp}
     />
+    </div>
   );
 };
 

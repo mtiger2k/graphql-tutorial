@@ -9,29 +9,7 @@ import Box from '../../../lib/widgets/Box';
 const NotFound = ({ match }) => {
   
   return (
-    <PageWrapper>
-      <PageHeader
-        title="Home page"
-        description="Welcome to the first page"
-      >
-        <Breadcrumb
-          items={[
-            { key: 1, icon: 'fa fa-home', title: 'Home', url: '/' },
-            { key: 2, title: 'Page' },
-          ]}
-        />
-      </PageHeader>
-      <PageContent>
-        <Box
-          title="Hello, World!"
-          status="primary"
-          expandable
-          removable
-        >
-    	<div className="NotFound">404 Not Found</div>
-        </Box>
-      </PageContent>
-    </PageWrapper>
+    <div className="NotFound">404 Not Found</div>
   );
 };
 

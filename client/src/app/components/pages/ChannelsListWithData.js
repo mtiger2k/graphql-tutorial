@@ -17,13 +17,6 @@ import Box from '../../../lib/widgets/Box';
 import AddChannel from './AddChannel';
 
 const ChannelsList = ({ data: {loading, error, channels }}) => {
-  if (loading) {
-    return <p>Loading ...</p>;
-  }
-  if (error) {
-    return <p>{error.message}</p>;
-  }
-
   return (
     <PageWrapper>
       <PageHeader
@@ -44,8 +37,9 @@ const ChannelsList = ({ data: {loading, error, channels }}) => {
           expandable
           removable
         >
-        <div className="channelsList">
-          <AddChannel />
+        {loading && <p>Loading ...</p>}
+        {error && <p>{error.message}</p>}
+        {!loading && <div className="channelsList">
           { channels.map( ch =>
             (<div key={ch.id} className={'channel ' + (ch.id < 0 ? 'optimistic' : '')}>
               <Link to={ch.id < 0 ? `/` : `channel/${ch.id}`}>
@@ -53,7 +47,8 @@ const ChannelsList = ({ data: {loading, error, channels }}) => {
               </Link>
             </div>)
           )}
-        </div>
+          <AddChannel />
+        </div>}
         </Box>
       </PageContent>
     </PageWrapper>
