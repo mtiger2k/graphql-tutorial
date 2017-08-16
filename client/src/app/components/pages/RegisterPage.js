@@ -15,8 +15,8 @@ class RegisterPage extends Component {
     }
   }
 
-  handleSubmit({email, password, passwordConfirmation}) {
-    this.props.signupUser({email, password, passwordConfirmation})
+  handleSubmit({username, password, passwordConfirmation}) {
+    this.props.signupUser({username, password, passwordConfirmation})
   }
 
   getRedirectPath() {

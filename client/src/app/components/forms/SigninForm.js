@@ -1,11 +1,11 @@
-import React, { Component, PropTypes } from 'react';
-import { reduxForm, Field, SubmissionError } from 'redux-form';
+import React, { Component } from 'react';
+import { reduxForm, Field } from 'redux-form';
 import { renderTextField } from './formHelpers'
 
 const validate = values => {
   const errors = {}
-  if (!values.email) {
-    errors.email = 'Required'
+  if (!values.username) {
+    errors.username = 'Required'
   }
   if (!values.password) {
     errors.password = 'Required'
@@ -27,7 +27,7 @@ class SigninForm extends Component {
 	}
 
     render() {
-        const { handleSubmit, resetForm, submitting, error } = this.props;
+        const { handleSubmit, submitting } = this.props;
         return (
 			<div className="login-box">
 			  <div className="login-logo">
@@ -37,7 +37,7 @@ class SigninForm extends Component {
 			    <p className="login-box-msg">Sign in to start your session</p>
 	            <form onSubmit={handleSubmit}>
 	            {this.renderAlert()}
-	                <Field name="email" type="text" component={renderTextField} label="邮箱"/>
+	                <Field name="username" type="text" component={renderTextField} label="登录名"/>
 	                <Field name="password" type="password" component={renderTextField} label="密码"/>
 	            <div className="row">
 	                <div className="col-xs-4 pull-right">

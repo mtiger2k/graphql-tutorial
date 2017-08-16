@@ -11,29 +11,22 @@ import MainRoutes from './routes';
 
 // integrate with redux
 import { AUTH_USER } from './actions/types'
-import configureStore from './lib/configureStore';
-import createApolloClient from './lib/createApolloClient';
+import { me } from './actions/user';
+
+import client from './lib/createApolloClient';
+import store from './lib/configureStore';
+import history from './lib/history';
 
 import {
   ApolloProvider
 } from 'react-apollo';
 import { ConnectedRouter } from 'react-router-redux'
 
-import createHistory from 'history/createBrowserHistory'
-
-const client = createApolloClient();
-
-const initialState = {};
-
-// Create a history of your choosing (we're using a browser history in this case)
-const history = createHistory()
-
-const store = configureStore(initialState, client, history);
-
 const token = localStorage.getItem('token');
 if (token) {
   // We need to update application state if the token exists
   store.dispatch({ type: AUTH_USER });
+  store.dispatch(me());
 }
 
 // Now you can dispatch navigation actions from anywhere!

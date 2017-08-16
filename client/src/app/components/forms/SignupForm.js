@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-import { reduxForm, Field, SubmissionError } from 'redux-form';
+import React, { Component } from 'react';
+import { reduxForm, Field } from 'redux-form';
 import { renderTextField } from './formHelpers'
 
 const validate = values => {
@@ -18,7 +18,7 @@ const validate = values => {
   } else if (values.password.length < 4) {
     errors.password = 'Must be 4 characters or more'
   }
-  if (values.confirmPassword != values.password) {
+  if (values.confirmPassword !== values.password) {
       errors.confirmPassword = 'Must match password'
     }
   return errors
@@ -27,7 +27,7 @@ const validate = values => {
 class SignupForm extends Component {
 
     render() {
-        const { handleSubmit, resetForm, submitting, error } = this.props;
+        const { handleSubmit, error } = this.props;
         return (
           <div className="register-box">
             <div className="register-logo">
@@ -61,7 +61,7 @@ class SignupForm extends Component {
 
         </div>
       </div>
-              );
+    );
     }
 }
 

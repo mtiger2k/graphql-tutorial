@@ -7,57 +7,56 @@ import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-trans
 
 import { createNetworkInterface } from 'apollo-upload-client'
 
-export default function createApolloClient() {
-  const token = localStorage.getItem('token');
-  const networkInterface = createNetworkInterface({ uri: '/graphql' });
-  networkInterface.use([{
-    applyMiddleware(req, next) {
-      setTimeout(next, 500);
-    },
-  }]);
 
-  networkInterface.use([{
-    applyMiddleware(req, next) {
-      if (!req.options.headers) {
-        req.options.headers = {};  // Create the header object if needed.
-      }
+const token = localStorage.getItem('token');
+const networkInterface = createNetworkInterface({ uri: '/graphql' });
+networkInterface.use([{
+  applyMiddleware(req, next) {
+    setTimeout(next, 500);
+  },
+}]);
 
-      // Get the authentication token from local storage if it exists
-      req.options.headers.token = token ? token : null;
-      next();
+networkInterface.use([{
+  applyMiddleware(req, next) {
+    if (!req.options.headers) {
+      req.options.headers = {};  // Create the header object if needed.
     }
-  }]);
-  
-  //TODO: need to set server:host in production environment
-  const wsClient = new SubscriptionClient(`ws://localhost:4000/subscriptions`, {
-    reconnect: true
-  });
 
-  const networkInterfaceWithSubscriptions = addGraphQLSubscriptions(
-    networkInterface,
-    wsClient
-  );
-
-  function dataIdFromObject (result) {
-    if (result.__typename) {
-      if (result.id !== undefined) {
-        return `${result.__typename}:${result.id}`;
-      }
-    }
-    return null;
+    // Get the authentication token from local storage if it exists
+    req.options.headers.token = token ? token : null;
+    next();
   }
+}]);
 
-  const client = new ApolloClient({
-    networkInterface: networkInterfaceWithSubscriptions,
-    customResolvers: {
-      Query: {
-        channel: (_, args) => {
-          return toIdValue(dataIdFromObject({ __typename: 'Channel', id: args['id'] }))
-        },
+//TODO: need to set server:host in production environment
+const wsClient = new SubscriptionClient(`ws://localhost:4000/subscriptions`, {
+  reconnect: true
+});
+
+const networkInterfaceWithSubscriptions = addGraphQLSubscriptions(
+  networkInterface,
+  wsClient
+);
+
+function dataIdFromObject (result) {
+  if (result.__typename) {
+    if (result.id !== undefined) {
+      return `${result.__typename}:${result.id}`;
+    }
+  }
+  return null;
+}
+
+const client = new ApolloClient({
+  networkInterface: networkInterfaceWithSubscriptions,
+  customResolvers: {
+    Query: {
+      channel: (_, args) => {
+        return toIdValue(dataIdFromObject({ __typename: 'Channel', id: args['id'] }))
       },
     },
-    dataIdFromObject,
-  });
+  },
+  dataIdFromObject,
+});
 
-  return client;
-}
+export default client;

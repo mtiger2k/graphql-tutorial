@@ -1,13 +1,13 @@
 import axios from 'axios'
 import { UNAUTH_USER, AUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from './types'
-//const ROOT_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : '/'
+import { me } from './user'
 
-export function signinUser({email, password}) {
+export function signinUser({username, password}) {
 
   return function (dispatch) {
 
-    // submit email and password to server
-    const request = axios.post('/signin', {email, password})
+    // submit username and password to server
+    const request = axios.post('/signin', {username, password})
     request
       .then(response => {
         // -Save the JWT token
@@ -15,6 +15,7 @@ export function signinUser({email, password}) {
 
         // -if request is good, we need to update state to indicate user is authenticated
         dispatch({type: AUTH_USER})
+        dispatch(me())
       })
 
       // If request is bad...
@@ -33,11 +34,12 @@ export function signoutUser() {
   }
 }
 
-export function signupUser({email, password, passwordConfirmation}) {
+export function signupUser({username, password, passwordConfirmation}) {
   return function (dispatch) {
-    axios.post('/signup', {email, password, passwordConfirmation})
+    axios.post('/signup', {username, password, passwordConfirmation})
       .then(response => {
         dispatch({type: AUTH_USER})
+        dispatch(me())
         localStorage.setItem('token', response.data.token)
       })
       .catch(({response}) => {

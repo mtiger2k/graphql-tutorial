@@ -19,8 +19,8 @@ class LoginPage extends Component {
     return location.state && <div className="alert alert-danger">{location.state.message}</div>
   }
 
-  handleSubmit({email, password}) {
-    this.props.signinUser({email, password})
+  handleSubmit({username, password}) {
+    this.props.signinUser({username, password})
   }
 
   getRedirectPath() {

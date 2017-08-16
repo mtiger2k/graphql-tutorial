@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Router,
   Route,
   Switch,
 } from 'react-router-dom';
@@ -22,13 +21,13 @@ import Feature from './app/components/pages/Feature'
 
 export const routes = () => {
 
-  const RouteWithLayout = ({ component, ...rest }) => {
+  /*const RouteWithLayout = ({ component, ...rest }) => {
     return (
       <Layout>
         <Route {...rest} render={ () => React.createElement(component) } />
       </Layout>
     );
-  };
+  };*/
 
   const PrivateRouteWithLayout = ({ ...rest }) => {
     return (
