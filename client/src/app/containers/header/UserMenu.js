@@ -29,13 +29,19 @@ export default connect((state) => {
     user: state.user.user
   }
 })(function ({user}) {
-  user.avatar = '/dist/img/user2-160x160.jpg';
+  if (!user) {
+    user = {};
+    user.dispName = 'loading';
+  } else {
+    user.avatar = '/dist/img/user2-160x160.jpg';
+    user.role = 'role';
+  }
   return (
     <UserMenu
       image={user.avatar}
-      name={user.username}
+      name={user.dispName}
       title={`${user.username} - ${user.dispName}`}
-      description={`Member since ${user.joined}`}
+      description={`Role: ${user.role}`}
       links={[
         { key: 1, text: 'Followers', url: '/followers' },
         { key: 2, text: 'Sales', url: '/sales' },

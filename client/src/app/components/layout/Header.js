@@ -1,5 +1,5 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
+import history from '../../../lib/history';
 
 import HeaderWrapper from '../../../lib/header/HeaderWrapper';
 import Logo from '../../../lib/header/Logo';
@@ -15,7 +15,7 @@ import UserMenu from '../../containers/header/UserMenu';
 export default function Header() {
   return (
     <HeaderWrapper>
-      <Logo onClick={() => browserHistory.push('/')}>
+      <Logo onClick={() => history.push('/')}>
         <MiniLogo>
           <b>A</b>LT
         </MiniLogo>

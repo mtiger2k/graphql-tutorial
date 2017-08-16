@@ -15,8 +15,14 @@ export default connect((state) => {
     user: state.user.user
   }
 })(function ({user}) {
-  user.isOnline = true;
-  user.avatar = '/dist/img/user2-160x160.jpg';
+  if (!user) {
+    user = {};
+    user.dispName = 'loading';
+    user.isOnline = false;
+  } else {
+    user.isOnline = true;
+    user.avatar = '/dist/img/user2-160x160.jpg';
+  }
 
   const onlineIcon = 'fa fa-circle text-success';
   const offlineIcon = 'fa fa-circle text-danger';
